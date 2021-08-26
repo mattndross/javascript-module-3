@@ -29,16 +29,12 @@ const clearDiv = (div) => {
 }
 
 
-const renderMiniCard = async characterUrl => {
-    const response = await fetch(characterUrl);
-    const characterObj = await response.json();
-    const miniCard = document.createElement('div');
-    miniCard.innerHTML = `<img src="${characterObj.image}" alt="${characterObj.name}"><h5>${characterObj.name}</h5><p>${characterObj.species} | ${characterObj.status}</p>`;
-    mainContainer.appendChild(miniCard);
-}
+const charactersContainer = document.createElement('div');
+charactersContainer.classList.add("row");
 
 const renderEpisodeCard = (episode) => {
     clearDiv(mainContainer);
+    clearDiv(charactersContainer);
     
     //title (name)
     const episodeTitle = document.createElement('h2');
@@ -51,9 +47,25 @@ const renderEpisodeCard = (episode) => {
     mainContainer.appendChild(episodeAirDateAndcode)
     
     //list of characters
+    
     episode.characters.forEach( characterUrl => {
         renderMiniCard(characterUrl);
     });
+
+    mainContainer.appendChild(charactersContainer);
+}
+
+
+
+
+
+const renderMiniCard = async (characterUrl) => {
+    const response = await fetch(characterUrl);
+    const characterObj = await response.json();
+    const miniCard = document.createElement('div');
+    miniCard.innerHTML = `<img src="${characterObj.image}" alt="${characterObj.name}"><h5>${characterObj.name}</h5><p>${characterObj.species} | ${characterObj.status}</p>`;
+    miniCard.classList.add("col-auto");
+    charactersContainer.appendChild(miniCard);    
 }
 
 //DISPLAY LIST OF ESPISODES ON THE SIDEBAR//
