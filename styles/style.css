@@ -1,7 +1,37 @@
-.sidebar {
-    height: 100vh;
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+
+body {
+    font-family:  'Montserrat', sans-serif;
+    font-weight: 300;
 }
 
-.main-continer {
-    height: 100vh;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+}
+
+.header {
+    box-shadow:  0 0 5px  #888;
+}
+
+.header h3 {
+    padding-left: 2rem;
+}
+
+.list-group {
+    
+    box-shadow:  0 0 5px  #888;
+}
+
+.btn {
+    width: 100%;
+}
+
+.main-container {
+    box-shadow:  0 0 5px  #888;
+}
+
+.clickable:hover {
+    color: #C4C4C4;
+    filter: brightness(110%);
 }
