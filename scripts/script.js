@@ -7,33 +7,36 @@ header.classList.add("header");
 header.innerHTML = "<h3>Rick and Morty app</h3>";
 rootDiv.appendChild(header);
 
-///create sidebar and main container
+//create general container 
 const rowContainer = document.createElement('div');
 rowContainer.classList.add("row");
 rootDiv.appendChild(rowContainer);
 
+//create sidebar
 const sidebar = document.createElement('div');
 sidebar.classList.add("sidebar", "col-4", "d-flex", "flex-column");
 rowContainer.appendChild(sidebar);
-
-const superContainer = document.createElement('div');
-superContainer.classList.add("super-container", "col-8");
-rowContainer.appendChild(superContainer);
-const mainContainer = document.createElement('div');
-mainContainer.classList.add("main-container");
-superContainer.appendChild(mainContainer);
 
 const ulOfEpisodes = document.createElement('ul');
 ulOfEpisodes.classList.add("list-group")
 sidebar.appendChild(ulOfEpisodes);
 
+//create main container
+const superContainer = document.createElement('div'); //genero un contenedor para el main container para probar estilos del main-container
+superContainer.classList.add("super-container", "col-8");
+rowContainer.appendChild(superContainer);
+
+const mainContainer = document.createElement('div');
+mainContainer.classList.add("main-container");
+superContainer.appendChild(mainContainer);
+
+const charactersContainer = document.createElement('div'); // instancio este div fuera de renderEpisode() función para que renderMiniCard() pueda hacer hacer appendChild
+charactersContainer.classList.add("row");
+
+//render functions
 const clearDiv = (div) => {
     div.innerHTML = "";
 }
-
-
-const charactersContainer = document.createElement('div');
-charactersContainer.classList.add("row");
 
 const renderEpisodeCard = (episode) => {
     clearDiv(mainContainer);
