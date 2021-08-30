@@ -31,7 +31,7 @@ mainContainer.classList.add("main-container");
 superContainer.appendChild(mainContainer);
 
 const charactersContainer = document.createElement('div'); // instancio este div fuera de renderEpisode() función para que renderMiniCard() pueda hacer hacer appendChild
-charactersContainer.classList.add("row");
+charactersContainer.classList.add("characters-container");
 
 //render functions
 const clearDiv = (div) => {
@@ -44,7 +44,7 @@ const renderEpisodeCard = (episode) => {
     
     //title (name)
     const episodeTitle = document.createElement('h2');
-    episodeTitle.innerHTML = `Episode ${episode.id}`;
+    episodeTitle.innerHTML = `Episode ${episode.id} - ${episode.name}`;
     mainContainer.appendChild(episodeTitle);
     
     //air date and episode code
@@ -100,7 +100,7 @@ const renderMiniCard = async (characterUrl) => {
     const characterObj = await response.json();
     const miniCard = document.createElement('div');
     miniCard.innerHTML = `<img src="${characterObj.image}" alt="${characterObj.name}"><h5>${characterObj.name}</h5><p>${characterObj.species} | ${characterObj.status}</p>`;
-    miniCard.classList.add("col-auto", "clickable");
+    miniCard.classList.add("clickable", "mini-card");
     miniCard.onclick = () => {renderCharacterCard(characterUrl)};
     charactersContainer.appendChild(miniCard);    
 }
@@ -152,7 +152,7 @@ const allEpisodesBtn = document.createElement('button');
 allEpisodesBtn.classList.add("btn", "btn-success");
 allEpisodesBtn.id= "all-episodes-btn";
 allEpisodesBtn.innerHTML = "SHOW ALL EPISODES";
-sidebar.appendChild(allEpisodesBtn)
+ulOfEpisodes.appendChild(allEpisodesBtn)
 
 document.querySelector("#all-episodes-btn").addEventListener('click', () => {
     clearDiv(ulOfEpisodes);

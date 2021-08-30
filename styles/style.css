@@ -18,9 +18,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 2rem;
 }
 
-.list-group {
-    
+.list-group {    
     box-shadow:  0 0 5px  #888;
+    overflow: auto;
+    height: 100vh;
 }
 
 .btn {
@@ -29,9 +30,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .main-container {
     box-shadow:  0 0 5px  #888;
+    overflow: auto;
+    height: 100vh;
 }
 
 .clickable:hover {
     color: #C4C4C4;
     filter: brightness(110%);
+}
+
+.characters-container {
+    display: flex;
+    /* justify-content: space-evenly; */
+    align-content: flex-start;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.mini-card img {
+    max-width: 100%;
+    border-radius: 5px;
+    
+}
+.mini-card h5 {
+    max-width: 100%;
+    word-wrap: normal;
 }
