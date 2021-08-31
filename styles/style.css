@@ -11,27 +11,51 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
-    box-shadow:  0 0 5px  #888;
+    -webkit-box-shadow: 0 8px 6px -6px black;
+	-moz-box-shadow: 0 8px 6px -6px black;
+	box-shadow: 0 8px 6px -6px black;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .header h3 {
     padding-left: 2rem;
 }
 
+.contenedor {
+    display: flex;
+}
+
+.sidebar {
+    display: flex;
+    align-items: center;
+}
 .list-group {    
     box-shadow:  0 0 5px  #888;
     overflow: auto;
     height: 100vh;
+    width: 95%;
 }
 
 .btn {
     width: 100%;
 }
 
+.super-container {
+    display: flex;
+    justify-content: center;
+
+}
 .main-container {
+    align-self: center;
+    width: 97%;
     box-shadow:  0 0 5px  #888;
     overflow: auto;
     height: 100vh;
+}
+
+.main-container h2, .main-container p {
+    margin-left: 2%;
 }
 
 .clickable:hover {
@@ -47,12 +71,22 @@ h1, h2, h3, h4, h5, h6 {
     overflow: auto;
 }
 
+.mini-card {
+    margin: 2%;
+    max-width: 29%;
+}
+
 .mini-card img {
     max-width: 100%;
     border-radius: 5px;
     
 }
+
 .mini-card h5 {
     max-width: 100%;
     word-wrap: normal;
+}
+
+.mini-card p {
+    margin: 0%;
 }

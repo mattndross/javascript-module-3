@@ -9,7 +9,7 @@ rootDiv.appendChild(header);
 
 //create general container 
 const rowContainer = document.createElement('div');
-rowContainer.classList.add("row");
+rowContainer.classList.add("d-flex");
 rootDiv.appendChild(rowContainer);
 
 //create sidebar
