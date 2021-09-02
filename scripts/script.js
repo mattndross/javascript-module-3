@@ -35,13 +35,14 @@ charactersContainer.classList.add("characters-container");
 
 //fetching functions
 let page = 1;
+let firstHalf = true;
 
 const fetchListOfEpisodes = async () => {
     try {
         const url = `https://rickandmortyapi.com/api/episode?page=${page}`;
         const response = await fetch(url);
         const parsedResponse = await response.json();
-        return parsedResponse;
+        return parsedResponse.results;
 
     } catch(error) {
         console.log(error)
@@ -82,12 +83,10 @@ const renderEpisodeCard = async (episodeUrl) => {
     episodeAirDateAndcode.innerHTML = `${episodeObj.air_date} | ${episodeObj.episode}`
     mainContainer.appendChild(episodeAirDateAndcode)
     
-    //list of characters
-    
+    //list of characters    
     episodeObj.characters.forEach( characterUrl => {
         renderMiniCard(characterUrl);
     });
-
     mainContainer.appendChild(charactersContainer);
 }
 
@@ -133,8 +132,9 @@ const renderMiniCard = async (characterUrl) => {
 //DISPLAY LIST OF ESPISODES ON THE SIDEBAR//
 
 const renderTenEpisodesList =  async (i = 0) => {
+    clearDiv(ulOfEpisodes);
     const fullList = await fetchListOfEpisodes();
-    const trimmedEpisodesList = fullList.slice(i , 10);
+    const trimmedEpisodesList = fullList.slice(i , i + 10);
     trimmedEpisodesList.forEach(episodeObj => {
         const liElem = document.createElement('li');
         ulOfEpisodes.appendChild(liElem);
@@ -147,53 +147,41 @@ const renderTenEpisodesList =  async (i = 0) => {
         }
     })
 }
+renderTenEpisodesList()
 
 
+//create a buttons to display episodes
 
+const previousEpisodesBtn = document.createElement('button');
+previousEpisodesBtn.classList.add("btn", "btn-success");
+previousEpisodesBtn.id= "previous-episodes-btn";
+previousEpisodesBtn.innerHTML = "PREVIOUS EPISODES";
+sidebar.appendChild(previousEpisodesBtn);
+page === 1 && firstHalf && (previousEpisodesBtn.disabled = true);
 
-
-
-
-
-/* const getEpisodesList = async (numberOfepisodes) => {
-    try {
-        const url = `https://rickandmortyapi.com/api/episode`;
-        const response = await fetch(url);
-        const parsedRes = await response.json();
-        const url2 = "https://rickandmortyapi.com/api/episode?page=2";
-        const response2 = await fetch(url2);
-        const parsedRes2 = await response2.json();
-        const url3 = "https://rickandmortyapi.com/api/episode?page=3";
-        const response3 = await fetch(url3);
-        const parsedRes3 = await response3.json();
-        let arrayOfEpisodes = null;
-        arrayOfEpisodes = parsedRes.results;
-        arrayOfEpisodes.push(...parsedRes2.results);
-        arrayOfEpisodes.push(...parsedRes3.results);
-        
-        renderEpisodesList(arrayOfEpisodes, numberOfepisodes);        
-        renderEpisodeCard(arrayOfEpisodes[0].url);
-        
-    } catch(error) {
-        console.log(error);
-    }
+previousEpisodesBtn.onclick = () => {
+    firstHalf && page--;
+    firstHalf ? renderTenEpisodesList(10) : renderTenEpisodesList();    
+    firstHalf = !firstHalf;
+    (page === 1 && firstHalf) ? (previousEpisodesBtn.disabled = true) : (previousEpisodesBtn.disabled = false);
+    page === 3 ? (nextEpisodesBtn.disabled = true) : (nextEpisodesBtn.disabled = false);
 }
-getEpisodesList(10);
- */
 
-//create a button to display all episodes
-const allEpisodesBtn = document.createElement('button');
-allEpisodesBtn.classList.add("btn", "btn-success");
-allEpisodesBtn.id= "all-episodes-btn";
-allEpisodesBtn.innerHTML = "SHOW ALL EPISODES";
-ulOfEpisodes.appendChild(allEpisodesBtn)
+const nextEpisodesBtn = document.createElement('button');
+nextEpisodesBtn.classList.add("btn", "btn-success");
+nextEpisodesBtn.id= "next-episodes-btn";
+nextEpisodesBtn.innerHTML = "NEXT EPISODES";
+sidebar.appendChild(nextEpisodesBtn);
 
-document.querySelector("#all-episodes-btn").addEventListener('click', () => {
-    clearDiv(ulOfEpisodes);
-    getEpisodesList(41)
-});
+nextEpisodesBtn.onclick = () => {
+    !firstHalf && page++;
+    firstHalf ? renderTenEpisodesList(10) : renderTenEpisodesList();
+    firstHalf = !firstHalf;
+    (page === 1 && firstHalf) ? (previousEpisodesBtn.disabled = true) : (previousEpisodesBtn.disabled = false);
+    page === 3 ? (nextEpisodesBtn.disabled = true) : (nextEpisodesBtn.disabled = false);
+};
 
- window.onload = () => {
+window.onload = () => {
     renderEpisodeCard("https://rickandmortyapi.com/api/episode/28")
 };
  
