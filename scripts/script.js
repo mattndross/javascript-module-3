@@ -153,7 +153,7 @@ renderTenEpisodesList()
 //create a buttons to display episodes
 
 const previousEpisodesBtn = document.createElement('button');
-previousEpisodesBtn.classList.add("btn", "btn-success");
+previousEpisodesBtn.classList.add("btn", "btn-success", "previous-episode-btn");
 previousEpisodesBtn.id= "previous-episodes-btn";
 previousEpisodesBtn.innerHTML = "PREVIOUS EPISODES";
 sidebar.appendChild(previousEpisodesBtn);
@@ -168,7 +168,7 @@ previousEpisodesBtn.onclick = () => {
 }
 
 const nextEpisodesBtn = document.createElement('button');
-nextEpisodesBtn.classList.add("btn", "btn-success");
+nextEpisodesBtn.classList.add("btn", "btn-success", "next-episodes-btn");
 nextEpisodesBtn.id= "next-episodes-btn";
 nextEpisodesBtn.innerHTML = "NEXT EPISODES";
 sidebar.appendChild(nextEpisodesBtn);
